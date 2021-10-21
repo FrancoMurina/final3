@@ -1,35 +1,15 @@
 import React, { Component }  from "react";
 import {TouchableOpacity, View, TextInput, Text, StyleSheet} from "react-native";
-import {auth} from '../firebase/config';
 
 export default class Register extends Component{
     constructor (props){
         super(props);
         this.state={
             email:"",
-            password:"",
-            loggedIn: false,
-            error:"",
+            password:"", 
         }
     }
-    handleRegister() {
-        //alert(`REGISTRO: usuario: ${this.state.email}, password: ${this.state.password}`)
-        auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .then( response => {
-            console.log(response);
-            alert("Usuario registrado!");
-            this.setState({
-                loggedIn: true
-            })
-        })
-        .catch( error => {
-            console.log(error);
-            alert("Error en el registro");
-            this.setState({
-                error: "Fallo en el registro"
-            })
-        })
-    }
+
     render(){
         return(
             <View style={styles.container}>
@@ -47,7 +27,7 @@ export default class Register extends Component{
                 secureTextEntry={true}
                 onChangeText={text => this.setState({password:text})}
                 />
-                <TouchableOpacity style= {styles.button} onPress={()=> this.handleRegister()}>
+                <TouchableOpacity style= {styles.button} onPress={()=> this.props.handleRegister(this.state.email, this.state.password)}>
                     <Text style={styles.text}>Registrarse</Text>
                 </TouchableOpacity>
             </View>
