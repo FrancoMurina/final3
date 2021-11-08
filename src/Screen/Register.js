@@ -6,28 +6,42 @@ export default class Register extends Component{
         super(props);
         this.state={
             email:"",
-            password:"", 
+            password:"",
+            username:"",
         }
     }
-
+    onRegister(){
+        if (this.state.email !== "" && this.state.password !== "" && this.state.username !== ""){
+            this.props.handleRegister(this.state.email, this.state.password, this.state.username)
+        }
+        else {
+            console.log("Todos los campos deben estar completos!")
+        }
+    }
     render(){
         return(
             <View style={styles.container}>
                 <Text> Registro </Text>
-                <TextInput
-                style={styles.field}
-                keyboardType="email-address"
-                placeholder="email"
-                onChangeText={text => this.setState({email:text})}
-                />
-                <TextInput
-                style={styles.field}
-                keyboardType="default"
-                placeholder="password"
-                secureTextEntry={true}
-                onChangeText={text => this.setState({password:text})}
-                />
-                <TouchableOpacity style= {styles.button} onPress={()=> this.props.handleRegister(this.state.email, this.state.password)}>
+                    <TextInput
+                        style={styles.field}
+                        keyboardType="default"
+                        placeholder="username"
+                        onChangeText={text => this.setState({username:text})}
+                    />
+                    <TextInput
+                        style={styles.field}
+                        keyboardType="email-address"
+                        placeholder="email"
+                        onChangeText={text => this.setState({email:text})}
+                    />
+                    <TextInput
+                        style={styles.field}
+                        keyboardType="default"
+                        placeholder="password"
+                        secureTextEntry={true}
+                        onChangeText={text => this.setState({password:text})}
+                    />
+                <TouchableOpacity style= {styles.button} onPress={()=> this.onRegister()}>
                     <Text style={styles.text}>Registrarse</Text>
                 </TouchableOpacity>
             </View>

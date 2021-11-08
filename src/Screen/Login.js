@@ -12,24 +12,25 @@ constructor(props){
 }
 
     render(){
+        //console.log(this.state.loggedIn);
     return(
         <View style={styles.container}>
-            <Text>Login</Text>
-            <TextInput
-            style={styles.field}
-            keyboardType = "email-address"
-            placeholder = "email"
-            onChangeText = {text => this.setState({email:text})}
-            />
-            <TextInput
-            style={styles.field}
-            keyboardType = "number-pad"
-            placeholder = "password"
-            secureTextEntry= {true}
-            onChangeText = {text => this.setState({password:text})}
-            />
+            <Text style = {styles.text}>Movie app</Text>
+                <TextInput
+                    style={styles.field}
+                    keyboardType = "email-address"
+                    placeholder = "email"
+                    onChangeText = {text => this.setState({email:text})}
+                />
+                <TextInput
+                    style={styles.field}
+                    keyboardType = "number-pad"
+                    placeholder = "password"
+                    secureTextEntry= {true}
+                    onChangeText = {text => this.setState({password:text})}
+                />
             <TouchableOpacity style={styles.button} onPress={()=> this.props.handleLogin(this.state.email, this.state.password)}>
-            <Text>Loggearse</Text>
+                <Text style = {styles.text}>Login</Text>
             </TouchableOpacity>
         </View>
     )
