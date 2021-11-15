@@ -45,6 +45,7 @@ guardarFoto(url){
 }
 
 render(){
+
     
     return(
         <React.Fragment>

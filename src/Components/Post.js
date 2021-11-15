@@ -73,12 +73,14 @@ closeModal(){
     })
 }
 render(){
-    // console.log(this.props.dataItem);
+    console.log(this.props.dataItem);
+
+
     return(
         <View stlye={styles.container}>
             <Text>{this.props.dataItem.data.description}</Text>
-            <Text>{this.props.dataItem.data.photo}</Text>
-            <Text>{this.props.dataItem.data.email}</Text>
+            <Image source={{uri: this.props.dataItem.data.photo}} style={styles.image}></Image>
+            <Text>{this.props.dataItem.data.owner}</Text>
             <Text>Likes: {this.state.likes}</Text>
             {
                 !this.state.liked ?
@@ -128,6 +130,7 @@ render(){
 const styles = StyleSheet.create({
     image: {
         height: 200,
+        width: 100,
     
     },
     container:{

@@ -10,7 +10,7 @@ export default class Profile extends Component{
         this.state= {}
     }
     componentDidMount(){
-        db.collection('posts').where('email','==','fmurina@yahoo.com').orderBy("createdAt", "desc").onSnapshot(
+        db.collection('posts').where('email','==', auth.currentUser.email).orderBy("createdAt", "desc").onSnapshot(
             docs => {
                 let postsAux = [] //Variable auxiliar
                 docs.forEach( doc => {
@@ -26,9 +26,18 @@ export default class Profile extends Component{
         )
     }
     render(){
+
+        console.log(auth.currentUser)
+
         return(
             <View style={styles.container}>
-                <Text> Profile </Text>
+                <Text> Profile: {auth.currentUser.displayName} </Text>
+                <Text> Fecha de ultimo acceso: {auth.currentUser.metadata.lastSignInTime} </Text>
+
+                <TouchableOpacity style= {styles.button} onPress={()=> this.props.logout()}>
+                    <Text style={styles.text}> Logout </Text>
+                </TouchableOpacity>
+
                 <FlatList
                 data = {this.state.posts}
                 keyExtractor = {post => post.id.toString()}

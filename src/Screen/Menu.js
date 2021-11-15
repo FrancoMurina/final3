@@ -93,7 +93,8 @@ export default class Menu extends Component{
                             {props =><Home {...props} logout={()=>this.logout()}/>}
                         </Drawer.Screen>
                         <Drawer.Screen name="Profile" >
-                            {props =><Profile {...props} />}
+                            {props =><Profile {...props} logout={()=>this.logout()}/>}
+                            
                         </Drawer.Screen>
                         <Drawer.Screen name="CreatePost" >
                             {props =><CreatePost {...props} />}
@@ -105,7 +106,7 @@ export default class Menu extends Component{
                             {props =><Login {...props} handleLogin={(email, password)=>this.handleLogin(email, password)}/>}
                         </Drawer.Screen>
                         <Drawer.Screen name="Register" >
-                            {props =><Register {...props} handleRegister={(email, password)=>this.handleRegister(email,password)}/>}
+                            {props =><Register {...props} handleRegister={(email, password, username)=>this.handleRegister(email,password, username)}/>}
                         </Drawer.Screen>
                     </React.Fragment>
                 }   
