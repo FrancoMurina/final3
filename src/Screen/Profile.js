@@ -7,10 +7,15 @@ import firebase from 'firebase';
 export default class Profile extends Component{
     constructor (props){
         super(props);
-        this.state= {}
+        this.state= {
+            posts:[],
+        }
     }
     componentDidMount(){
-        db.collection('posts').where('email','==', auth.currentUser.email).orderBy("createdAt", "desc").onSnapshot(
+        db.collection('posts')
+        .where('email','==', auth.currentUser.email)
+        .orderBy("createdAt", "desc")
+        .onSnapshot(
             docs => {
                 let postsAux = [] //Variable auxiliar
                 docs.forEach( doc => {
@@ -27,13 +32,13 @@ export default class Profile extends Component{
     }
     render(){
 
-        console.log(auth.currentUser)
-
+        // console.log(auth.currentUser)
+        // console.log(this.state.posts)
         return(
             <View style={styles.container}>
                 <Text> Profile: {auth.currentUser.displayName} </Text>
                 <Text> Fecha de ultimo acceso: {auth.currentUser.metadata.lastSignInTime} </Text>
-
+                <Text>Usted tiene: {this.state.posts.length} publicaciones.</Text>
                 <TouchableOpacity style= {styles.button} onPress={()=> this.props.logout()}>
                     <Text style={styles.text}> Logout </Text>
                 </TouchableOpacity>

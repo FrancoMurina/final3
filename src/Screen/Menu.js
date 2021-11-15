@@ -8,6 +8,7 @@ import Login from './Login';
 import Register from './Register';
 import CreatePost from "./CreatePost";
 import Profile from "./Profile";
+import Buscador from "./Buscador";
 
 
 export default class Menu extends Component{
@@ -99,7 +100,10 @@ export default class Menu extends Component{
                         <Drawer.Screen name="CreatePost" >
                             {props =><CreatePost {...props} />}
                         </Drawer.Screen>
-                        </React.Fragment>
+                        <Drawer.Screen name="Buscador" >
+                            {props =><Buscador {...props} />}
+                        </Drawer.Screen>
+                    </React.Fragment>
                     :
                     <React.Fragment>
                         <Drawer.Screen name="Login" >
