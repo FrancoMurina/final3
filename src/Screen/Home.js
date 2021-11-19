@@ -30,11 +30,11 @@ export default class Home extends Component{
     render(){
         console.log(this.state.posts);
         return(
-            <View style={styles.container}>
-                <Text> Home </Text>
-                <TouchableOpacity style= {styles.button} onPress={()=> this.props.logout()}>
+            <React.Fragment style={styles.container}>
+                {/* <Text> Home </Text> */}
+                {/* <TouchableOpacity style= {styles.button} onPress={()=> this.props.logout()}>
                     <Text style={styles.text}> Logout </Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <FlatList
                 data = {this.state.posts}
                 keyExtractor = {post => post.id.toString()}
@@ -46,7 +46,7 @@ export default class Home extends Component{
                 }
                     
                 />
-            </View>
+            </React.Fragment>
         )
     }
 }

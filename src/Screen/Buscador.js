@@ -8,18 +8,40 @@ export default class Buscador extends Component{
         super(props);
         this.state= {
             posts:[],
-            usuarios:[],
+            // usuarios:[],
         }
     }
     
-    componentDidMount(){
-       if(this.state.usuarios.length == 0){
-           alert("Busque lo que quiera")
-       }else{
+    // componentDidMount(){
+    //    if(this.state.usuarios.length == 0){
+    //        alert("Busque lo que quiera")
+    //    }else{
+    //     db.collection('posts')
+    //     .where("email", '==', this.state.usuarios)
+    //     .orderBy("createdAt", "desc")
+    //     .onSnapshot(
+    //         docs => {
+    //             let postsAux = [] //Variable auxiliar
+    //             docs.forEach( doc => {
+    //                 postsAux.push({
+    //                     id: doc.id,
+    //                     data: doc.data()
+    //                 })
+    //             })
+    //             this.setState({
+    //                 posts: postsAux
+    //             })
+    //         }
+    //     )}
+    
+    
+    // }
+
+    onSearch(text){
         db.collection('posts')
-        .where("email", '==', this.state.usuarios)
-        .orderBy("createdAt", "desc")
-        .onSnapshot(
+        .where("email", '==', text)
+        // .orderBy("createdAt", "desc")
+        .get().then(
             docs => {
                 let postsAux = [] //Variable auxiliar
                 docs.forEach( doc => {
@@ -32,16 +54,12 @@ export default class Buscador extends Component{
                     posts: postsAux
                 })
             }
-        )}
-    
-    
-    }
-    onSearch(){
+        )
         
     }
     render(){
         console.log(this.state.posts)
-        console.log(this.state.usuarios.length)
+        // console.log(this.state.usuarios.length)
         return(
             <View>
             <Text>Buscador</Text>
@@ -49,7 +67,7 @@ export default class Buscador extends Component{
                     style={styles.field}
                     keyboardType = "Buscador"
                     placeholder = "Busqueda"
-                    onChangeText = {text => this.setState({usuarios:text})}
+                    onChangeText = {text => this.onSearch(text)}
             />
             {/* <TouchableOpacity style={styles.button} onPress={()=> ())}>
                 <Text style = {styles.text}>Login</Text>
