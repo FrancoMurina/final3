@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity, Modal } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, Modal, TextInput } from 'react-native'
 import { auth, db } from '../firebase/config';
 import firebase from 'firebase';
 
@@ -11,7 +11,10 @@ constructor(props){
         liked: false,
         likes: 0,
         showModal: false,
-    }
+        commented: false,
+        comments: [],
+        commentBoxInput: "",
+    };
 }
 
 componentDidMount(){
@@ -57,6 +60,27 @@ onDislike(){
         })
     })
 }
+
+onComment(){
+    const posteoActualizar=db.collection("posts").doc(this.props.dataItem.id);
+    
+    posteoActualizar.update({
+        comments: firebase.firestore.FieldValue.arrayUnion({
+         userDisplayName: auth.currentUser.displayName,
+        comment: this.state.commentBoxInput,
+    }),
+})
+.then(() => {
+    this.setState({
+      comments: this.state.comments + 1,
+});
+})
+
+.catch ((error) => {
+    console.log (error);
+});
+}
+
 //Va a mostrar el modal
 showModal(){
     //console.log('Mostrando modal')
@@ -65,7 +89,7 @@ showModal(){
     })
 }
 
-//Va a crrar el modal
+//Va a crear el modal
 closeModal(){
     //console.log('Cerrando modal')
     this.setState({
@@ -123,12 +147,29 @@ render(){
             >
                 <View>
                     <TouchableOpacity style ={styles.closeModal} onPress= {()=>{this.closeModal()}}>
-                        <Text style ={styles.modalText}> X</Text>
+                        <Text style ={styles.modalText}>X</Text>
                     </TouchableOpacity>
                     <Text>
                         Aca hay comentarios!!!!
                     </Text>
-                
+            
+            <TextInput
+            style={styles.commentBoxInput}
+            keyboardType="default"
+            placeholder="Comentario..."
+            multiline={true}
+            numberOfLines={2}
+            onChangeText={(text) => this.setState({ commentBoxInput: text })}
+            value={this.state.commentBoxInput}
+            />
+            <TouchableOpacity 
+            style={styles.uploadCommentButton} 
+            onPress={() => this.onComment()}>
+
+            <Text style={styles.text}>Comentar</Text>
+            </TouchableOpacity>
+
+
                 </View>    
             </Modal>
             :
