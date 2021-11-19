@@ -30,12 +30,21 @@ export default class Profile extends Component{
             }
         )
     }
+
+    delete(id){
+        const posteoActualizar = db.collection('posts').doc(id)
+        posteoActualizar.delete()
+        //filter por id
+        posts = posts.filter(id)
+
+    }
+
     render(){
 
         // console.log(auth.currentUser)
         // console.log(this.state.posts)
         return(
-            <View style={styles.container}>
+            <React.Fragment style={styles.container}>
                 <Text> Profile: {auth.currentUser.displayName} </Text>
                 <Text> Fecha de ultimo acceso: {auth.currentUser.metadata.lastSignInTime} </Text>
                 <Text>Usted tiene: {this.state.posts.length} publicaciones.</Text>
@@ -48,13 +57,16 @@ export default class Profile extends Component{
                 keyExtractor = {post => post.id.toString()}
                 renderItem = { ({item}) => 
                 <>
-                    <Post dataItem = {item}></Post>         
+                    <Post dataItem = {item}
+                        delete ={(id)=>this.delete(id)}>
+                    </Post>   
+                      
                     {/* <Profile dataItem = {item}></Profile>  */}
                 </>
                 }
                     
                 />
-            </View>
+            </React.Fragment>
         )
     }
 }

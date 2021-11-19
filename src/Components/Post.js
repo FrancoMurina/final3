@@ -81,6 +81,18 @@ render(){
             <Text>{this.props.dataItem.data.description}</Text>
             <Image source={{uri: this.props.dataItem.data.photo}} style={styles.image}></Image>
             <Text>{this.props.dataItem.data.owner}</Text>
+            <Text>Publicado hace: {Math.ceil((Date.now()- this.props.dataItem.data.createdAt)/1000/3600)} horas</Text>
+            <Text>{this.props.dataItem.data.owner}</Text>
+            {
+                this.props.dataItem.data.email == auth.currentUser.email?
+                <TouchableOpacity onPress = {()=> this.props.delete(this.props.dataItem.id)}>
+                    <Text>
+                        Borrar
+                    </Text>
+                </TouchableOpacity>
+                :
+                null
+            }
             <Text>Likes: {this.state.likes}</Text>
             {
                 !this.state.liked ?
