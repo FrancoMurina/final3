@@ -35,7 +35,7 @@ export default class Profile extends Component{
         const posteoActualizar = db.collection('posts').doc(id)
         posteoActualizar.delete()
         //filter por id
-        posts = posts.filter(id)
+        // posts = posts.filter(id)
 
     }
 
@@ -44,7 +44,7 @@ export default class Profile extends Component{
         // console.log(auth.currentUser)
         // console.log(this.state.posts)
         return(
-            <React.Fragment style={styles.container}>
+            <React.Fragment>
                 <Text> Profile: {auth.currentUser.displayName} </Text>
                 <Text> Fecha de ultimo acceso: {auth.currentUser.metadata.lastSignInTime} </Text>
                 <Text>Usted tiene: {this.state.posts.length} publicaciones.</Text>
@@ -53,17 +53,21 @@ export default class Profile extends Component{
                 </TouchableOpacity>
 
                 <FlatList
-                data = {this.state.posts}
-                keyExtractor = {post => post.id.toString()}
-                renderItem = { ({item}) => 
-                <>
-                    <Post dataItem = {item}
-                        delete ={(id)=>this.delete(id)}>
-                    </Post>   
-                      
-                    {/* <Profile dataItem = {item}></Profile>  */}
-                </>
-                }
+                    data = {this.state.posts}
+                    keyExtractor = {post => post.id.toString()}
+                    renderItem = { ({item}) => 
+                        <>
+                            <Post dataItem = {item}></Post>   
+                        {     
+                        <TouchableOpacity onPress = {()=> this.delete(item.id)}>
+                            <Text>
+                                Borrar
+                            </Text>
+                        </TouchableOpacity>
+                        }
+                            
+                        </>
+                    }
                     
                 />
             </React.Fragment>

@@ -27,6 +27,13 @@ export default class Home extends Component{
             }
         )
     }
+    delete(id){
+        const posteoActualizar = db.collection('posts').doc(id)
+        posteoActualizar.delete()
+        //filter por id
+        // posts = posts.filter(id)
+
+    }
     render(){
         console.log(this.state.posts);
         return(
@@ -40,15 +47,17 @@ export default class Home extends Component{
                 keyExtractor = {post => post.id.toString()}
                 renderItem = { ({item}) => 
                 <>
-                    <Post dataItem = {item}></Post>         
-                    {/* <Profile dataItem = {item}></Profile>  */}
+                    <Post dataItem = {item}></Post>                      
                 </>
                 }
                     
                 />
             </React.Fragment>
+            
         )
+        
     }
+    
 }
 
 const styles = StyleSheet.create({
