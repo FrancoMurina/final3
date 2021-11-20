@@ -21,9 +21,9 @@ export default class Register extends Component{
     render(){
         return(
             <View style={styles.container}>
-                <Text> Registro </Text>
+                {/* <Text style = {styles.text}> Registro </Text> */}
                     <TextInput
-                        style={styles.field}
+                        style={styles.fieldOne}
                         keyboardType="default"
                         placeholder="username"
                         onChangeText={text => this.setState({username:text})}
@@ -53,18 +53,56 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         alignitems: "center",
+        backgroundColor: '#f3e0ef',
     },
-    field:{
+    fieldOne:{
+        // textAlign: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
         width:'80%',
-        backgroundColor:'#09009B',
+        backgroundColor:'purple',
         color:"#FFA400",
         padding: 10,
+        marginLeft: 40,
         marginvertical: 10,
+        fontSize: 15,
+        marginTop: 30
+    },
+    field:{
+        // textAlign: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
+        width:'80%',
+        backgroundColor:'purple',
+        color:"#FFA400",
+        padding: 10,
+        marginLeft: 40,
+        marginvertical: 10,
+        fontSize: 15
     },
     button:{
         width:'30%',
         backgrpungcolor:'#0F00FF',
-        color:"#FFA400"
+        color:"#FFA400",
+        textAlign: 'center',
+        marginLeft: 150,
+        // backgroundColor: 'purple',
+        paddingTop: 30,
+        borderColor: 'black'
+    },
+    text:{
+        textAlign: 'center',
+        fontWeight: 50,
+        fontSize: 20,
+        paddingTop: 20,
+        paddingBottom: 30
+    },
+    textBoton:{
+        // marginLeft: 100,
+        // textAlign: 'center',
+        fontSize: 20,
+        paddingTop: 20 ,
+        borderColor: 'black'
     }
 
 })
