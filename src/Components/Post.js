@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity, Modal, TextInput } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, Modal, TextInput, FlatList } from 'react-native'
 import { auth, db } from '../firebase/config';
 import firebase from 'firebase';
 
@@ -62,11 +62,12 @@ onDislike(){
 }
 
 onComment(){
+    if(this.state.commentBoxInput !== ""){
     const posteoActualizar=db.collection("posts").doc(this.props.dataItem.id);
     
     posteoActualizar.update({
         comments: firebase.firestore.FieldValue.arrayUnion({
-         userDisplayName: auth.currentUser.displayName,
+        userDisplayName: auth.currentUser.displayName,
         comment: this.state.commentBoxInput,
     }),
 })
@@ -78,7 +79,7 @@ onComment(){
 
 .catch ((error) => {
     console.log (error);
-});
+});}
 }
 
 //Va a mostrar el modal
@@ -97,26 +98,15 @@ closeModal(){
     })
 }
 render(){
-    console.log(this.props.dataItem);
+    console.log(this.props.dataItem.data.comments);
 
 
     return(
         <View stlye={styles.container}>
-            <Text>{this.props.dataItem.data.description}</Text>
             <Image source={{uri: this.props.dataItem.data.photo}} style={styles.image}></Image>
             <Text>{this.props.dataItem.data.owner}</Text>
+            <Text>{this.props.dataItem.data.description}</Text>
             <Text>Publicado hace: {Math.ceil((Date.now()- this.props.dataItem.data.createdAt)/1000/3600)} horas</Text>
-            <Text>{this.props.dataItem.data.owner}</Text>
-            {/* {
-                this.props.dataItem.data.email == auth.currentUser.email?
-                <TouchableOpacity onPress = {()=> this.props.delete(this.props.dataItem.id)}>
-                    <Text>
-                        Borrar
-                    </Text>
-                </TouchableOpacity>
-                :
-                null
-            } */}
             <Text>Likes: {this.state.likes}</Text>
             {
                 !this.state.liked ?
@@ -132,13 +122,19 @@ render(){
                     </Text>
                 </TouchableOpacity>
             }
+            {/* <TouchableOpacity onPress={()=>{this.showModal()}}>
+                <Text>
+                    Ver comentarios
+                </Text>
+            </TouchableOpacity> */}
+            {
+            this.state.showModal == false ?
             <TouchableOpacity onPress={()=>{this.showModal()}}>
                 <Text>
                     Ver comentarios
                 </Text>
             </TouchableOpacity>
-            {
-            this.state.showModal ?
+            :
             <Modal
                 animationType = "fade"
                 transparent ={false}
@@ -147,18 +143,29 @@ render(){
             >
                 <View>
                     <TouchableOpacity style ={styles.closeModal} onPress= {()=>{this.closeModal()}}>
-                        <Text style ={styles.modalText}>X</Text>
+                        <Text style ={styles.modalText}>Cerrar comentarios</Text>
                     </TouchableOpacity>
-                    <Text>
+                    {/* <Text>
                         Aca hay comentarios!!!!
-                    </Text>
-            
+                    </Text> */}
+            <FlatList
+                    data = {this.props.dataItem.data.comments}
+                    keyExtractor = {item => item.userDisplayName.toString()}
+                    renderItem = { ({item}) => 
+                      <>
+                           <Text>{item.userDisplayName}: {item.comment}</Text> 
+                        
+                            
+                         </>
+                    }
+                    
+                />
             <TextInput
             style={styles.commentBoxInput}
             keyboardType="default"
             placeholder="Comentario..."
             multiline={true}
-            numberOfLines={2}
+            numberOfLines={1}
             onChangeText={(text) => this.setState({ commentBoxInput: text })}
             value={this.state.commentBoxInput}
             />
@@ -172,8 +179,7 @@ render(){
 
                 </View>    
             </Modal>
-            :
-            null
+            
         }
         </View>
     )

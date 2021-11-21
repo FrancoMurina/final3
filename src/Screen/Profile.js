@@ -42,7 +42,7 @@ export default class Profile extends Component{
     render(){
 
         // console.log(auth.currentUser)
-        // console.log(this.state.posts)
+       
         return(
             <React.Fragment>
                 <Text> Profile: {auth.currentUser.displayName} </Text>
