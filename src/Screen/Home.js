@@ -67,5 +67,31 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: '#09009B'
-    }
+    },
+//         card: {
+//           backgroundColor: theme['color-basic-100'],
+//           marginBottom: 25
+//         },
+//         cardImage: {
+//           width: '100%',
+//           height: 300
+//         },
+//         cardHeader: {
+//           padding: 10,
+//           flexDirection: 'row',
+//           alignItems: 'center',
+//           justifyContent: 'space-between'
+//         },
+//         cardTitle: {
+//           color: theme['color-basic-1000']
+//         },
+//         cardAvatar: {
+//           marginRight: 16
+//         },
+//         cardContent: {
+//           padding: 10,
+//           borderWidth: 0.25,
+//           borderColor: theme['color-basic-600']
+//         },
+      
 })

@@ -103,21 +103,21 @@ render(){
 
     return(
         <View stlye={styles.container}>
-            <Image source={{uri: this.props.dataItem.data.photo}} style={styles.image}></Image>
-            <Text>{this.props.dataItem.data.owner}</Text>
-            <Text>{this.props.dataItem.data.description}</Text>
-            <Text>Publicado hace: {Math.ceil((Date.now()- this.props.dataItem.data.createdAt)/1000/3600)} horas</Text>
-            <Text>Likes: {this.state.likes}</Text>
+            <Image source={{uri: this.props.dataItem.data.photo}} style={styles.cardImage}></Image>
+            <Text style={styles.letras}>Publicado por:  {this.props.dataItem.data.owner}</Text>
+            <Text style={styles.letras}>Descripción:  {this.props.dataItem.data.description}</Text>
+            <Text style={styles.letras}>Publicado hace: {Math.ceil((Date.now()- this.props.dataItem.data.createdAt)/1000/3600)} horas</Text>
+            <Text style={styles.letras}>Likes: {this.state.likes}</Text>
             {
                 !this.state.liked ?
                 <TouchableOpacity onPress = {()=> this.onLike()}>
-                    <Text>
+                    <Text style={styles.likeado}>
                         Like
                     </Text>
                 </TouchableOpacity>
                 :
                 <TouchableOpacity onPress = {()=> this.onDislike()}>
-                    <Text>
+                    <Text style={styles.disLike}>
                         Unlike
                     </Text>
                 </TouchableOpacity>
@@ -130,7 +130,7 @@ render(){
             {
             this.state.showModal == false ?
             <TouchableOpacity onPress={()=>{this.showModal()}}>
-                <Text>
+                <Text style={styles.letras}>
                     Ver comentarios
                 </Text>
             </TouchableOpacity>
@@ -143,7 +143,7 @@ render(){
             >
                 <View>
                     <TouchableOpacity style ={styles.closeModal} onPress= {()=>{this.closeModal()}}>
-                        <Text style ={styles.modalText}>Cerrar comentarios</Text>
+                        <Text style ={styles.modalText} style={styles.comentarios}>Cerrar comentarios</Text>
                     </TouchableOpacity>
                     {/* <Text>
                         Aca hay comentarios!!!!
@@ -153,7 +153,7 @@ render(){
                     keyExtractor = {item => item.userDisplayName.toString()}
                     renderItem = { ({item}) => 
                       <>
-                           <Text>{item.userDisplayName}: {item.comment}</Text> 
+                           <Text style = {styles.letras}>{item.userDisplayName}: {item.comment}</Text> 
                         
                             
                          </>
@@ -161,7 +161,7 @@ render(){
                     
                 />
             <TextInput
-            style={styles.commentBoxInput}
+            style={styles.commentBoxInput} style={styles.letras}
             keyboardType="default"
             placeholder="Comentario..."
             multiline={true}
@@ -173,7 +173,7 @@ render(){
             style={styles.uploadCommentButton} 
             onPress={() => this.onComment()}>
 
-            <Text style={styles.text}>Comentar</Text>
+            <Text style={styles.text} style={styles.comentarios}>Comentar</Text>
             </TouchableOpacity>
 
 
@@ -186,15 +186,61 @@ render(){
 }
 }
 
-const styles = StyleSheet.create({
-    image: {
-        height: 200,
-        width: 100,
+// const styles = StyleSheet.create({
+//     image: {
+//         height: 200,
+//         width: 100,
     
-    },
-    container:{
+//     },
+//     container:{
+//         flex: 1,
+//         justifyContent: 'center',
+//         padding: 5,
+//     }
+// })
+
+const styles = StyleSheet.create({
+    container: {
         flex: 1,
-        justifyContent: 'center',
-        padding: 5,
-    }
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: '#09009B',
+        backgroundColor: "black",
+        marginBottom: 25,
+    },
+        cardImage: {
+          width: '100%',
+          height: 300,
+          padding: 10,
+          marginLeft: 15, 
+          marginRight: 15,
+        },
+    letras: {
+        fontFamily: "futura",
+        fontSize: 13,
+        color: 'black',
+        marginLeft: 15, 
+    },
+    disLike: {
+        fontFamily: "futura",
+        fontSize: 13,
+        color: 'red',
+        marginLeft: 15, 
+    },
+    likeado: {
+        fontFamily: "futura",
+        fontSize: 13,
+        color: 'green',
+        marginLeft: 15, 
+    },
+    comentarios: {
+        fontFamily: "futura",
+        fontSize: 13,
+        color: 'purple',
+        marginLeft: 15,
+    },
+        cardTitle: {
+          color:'black',
+        },   
 })
