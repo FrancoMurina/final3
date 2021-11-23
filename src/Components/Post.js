@@ -98,14 +98,14 @@ closeModal(){
     })
 }
 render(){
-    console.log(this.props.dataItem.data.comments);
+    // console.log(this.props.dataItem.data.comments);
 
 
     return(
         <View stlye={styles.container}>
             <Image source={{uri: this.props.dataItem.data.photo}} style={styles.cardImage}></Image>
-            <Text style={styles.letras}>Publicado por:  {this.props.dataItem.data.owner}</Text>
-            <Text style={styles.letras}>Descripción:  {this.props.dataItem.data.description}</Text>
+            <Text style={styles.letras}>Publicado por: {this.props.dataItem.data.owner}</Text>
+            <Text style={styles.letras}>Descripción: {this.props.dataItem.data.description}</Text>
             <Text style={styles.letras}>Publicado hace: {Math.ceil((Date.now()- this.props.dataItem.data.createdAt)/1000/3600)} horas</Text>
             <Text style={styles.letras}>Likes: {this.state.likes}</Text>
             {

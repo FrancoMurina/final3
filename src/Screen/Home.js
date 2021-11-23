@@ -11,52 +11,47 @@ export default class Home extends Component{
             posts: []
         }        
     }
-    componentDidMount(){
-        db.collection('posts').orderBy("createdAt", "desc").onSnapshot(
-            docs => {
-                let postsAux = [] //Variable auxiliar
-                docs.forEach( doc => {
-                    postsAux.push({
-                        id: doc.id,
-                        data: doc.data()
-                    })
-                })
-                this.setState({
-                    posts: postsAux
-                })
-            }
-        )
-    }
-    delete(id){
-        const posteoActualizar = db.collection('posts').doc(id)
-        posteoActualizar.delete()
-        //filter por id
-        // posts = posts.filter(id)
 
-    }
-    render(){
-        console.log(this.state.posts);
-        return(
-            <React.Fragment style={styles.container}>
-                {/* <Text> Home </Text> */}
-                {/* <TouchableOpacity style= {styles.button} onPress={()=> this.props.logout()}>
-                    <Text style={styles.text}> Logout </Text>
-                </TouchableOpacity> */}
-                <FlatList
-                data = {this.state.posts}
-                keyExtractor = {post => post.id.toString()}
-                renderItem = { ({item}) => 
-                <>
-                    <Post dataItem = {item}></Post>                      
-                </>
-                }
-                    
-                />
-            </React.Fragment>
-            
-        )
+componentDidMount(){
+    db.collection('posts').orderBy("createdAt", "desc").onSnapshot(
+        docs => {
+            let postsAux = [] //Variable auxiliar
+            docs.forEach( doc => {
+                postsAux.push({
+                    id: doc.id,
+                    data: doc.data()
+                })
+            })
+            this.setState({
+                posts: postsAux
+            })
+        }
+    )
+}
+
+delete(id){
+    const posteoActualizar = db.collection('posts').doc(id)
+    posteoActualizar.delete()
+}
+
+render(){
+    return(
+        <React.Fragment style={styles.container}>
+            <FlatList
+            data = {this.state.posts}
+            keyExtractor = {post => post.id.toString()}
+            renderItem = { ({item}) => 
+            <>
+                <Post dataItem = {item}></Post>                      
+            </>
+            }
+                
+            />
+        </React.Fragment>
         
-    }
+    )
+    
+}
     
 }
 
