@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         backgrpungcolor:'#0F00FF',
         color:"#FFA400",
         alignItems: 'center',
-        marginLeft: 150,
+        marginLeft: 15,
         borderColor: 'purple',
         borderWidth: 3,
         borderRadius: 12,
