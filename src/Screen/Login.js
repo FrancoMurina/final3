@@ -14,7 +14,6 @@ constructor(props){
     render(){
     return(
         <View style={styles.container}>
-            <Text style = {styles.title}> Posts app</Text>
                 <TextInput
                     style={styles.fieldOne}
                     keyboardType = "email-address"
