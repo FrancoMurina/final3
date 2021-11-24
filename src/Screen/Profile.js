@@ -2,6 +2,7 @@ import React, { Component }  from "react";
 import { Text, StyleSheet, TouchableOpacity, FlatList} from "react-native";
 import { auth, db } from '../firebase/config';
 import Post from '../components/Post';
+import { color } from "react-native-reanimated";
 
 export default class Profile extends Component{
     constructor (props){
@@ -37,17 +38,23 @@ delete(id){
 
 render(){
     return(
-        <React.Fragment>
-            <Text style={styles.letras}>Perfil de: {auth.currentUser.displayName} </Text>
+        <React.Fragment style={styles.container}>
+            <Text style={styles.title}> MIS DATOS </Text>
+            <Text style={styles.letras}>Username: {auth.currentUser.displayName} </Text>
+            <Text style={styles.letras}>Email: {auth.currentUser.email} </Text>
             <Text style={styles.letras}>Fecha de ultimo acceso: {auth.currentUser.metadata.lastSignInTime} </Text>
             {this.state.posts.length != 1?
-                <Text style={styles.letras}>Usted tiene: {this.state.posts.length} publicaciones.</Text>
+                <Text style={styles.letras}>Tiene: {this.state.posts.length} publicaciones</Text>
                 :
-                <Text style={styles.letras}>Usted tiene: {this.state.posts.length} publicacion.</Text>
+                <Text style={styles.letras}>Tiene: {this.state.posts.length} publicacion</Text>
             }
-            <TouchableOpacity style= {styles.button} onPress={()=> this.props.logout()}>
-                <Text style={styles.text} style={styles.exit}>Logout </Text>
+
+            <TouchableOpacity style= {styles.buttonLogout} onPress={()=> this.props.logout()}>
+                <Text style={styles.exit}>Logout </Text>
             </TouchableOpacity>
+
+            <Text style={styles.title}> MIS POSTEOS </Text>
+
             <FlatList
                 data = {this.state.posts}
                 keyExtractor = {post => post.id.toString()}
@@ -55,7 +62,7 @@ render(){
                     <>
                         <Post dataItem = {item}></Post>   
                     {     
-                    <TouchableOpacity onPress = {()=> this.delete(item.id)}>
+                    <TouchableOpacity style= {styles.buttonBorrar} onPress = {()=> this.delete(item.id)}>
                         <Text style={styles.exit}>Borrar</Text>
                     </TouchableOpacity>
                     }        
@@ -82,8 +89,42 @@ const styles = StyleSheet.create({
     },
     exit: {
         fontFamily: "futura",
-        fontSize: 13,
-        color: 'red',
-        marginLeft: 15, 
+        fontSize: 15,
+        // color: 'red',
+        // marginLeft: 15, 
+        alignItems: 'center',
+    },
+    buttonLogout: {
+        width:'30%',
+        backgrpungcolor:'#0F00FF',
+        color:"#FFA400",
+        alignItems: 'center',
+        marginLeft: 150,
+        borderColor: 'purple',
+        borderWidth: 3,
+        borderRadius: 12,
+        marginBottom: 5,
+        marginTop: 25
+    },
+    buttonBorrar: {
+        width:'30%',
+        backgrpungcolor:'#0F00FF',
+        color:"#FFA400",
+        alignItems: 'center',
+        marginLeft: 150,
+        borderColor: 'purple',
+        borderWidth: 3,
+        borderRadius: 12,
+        marginBottom: 25,
+        marginTop: 10
+    },
+    title:{
+        fontFamily: "futura",
+        textAlign: 'center',
+        fontWeight: 50,
+        fontSize: 20,
+        marginTop: 30,
+        marginBottom: 10,
+        color: 'purple'
     },
 })

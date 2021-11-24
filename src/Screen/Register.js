@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10
     },
     textBoton:{
+        fontFamily: "futura",
         fontSize: 20,
         paddingTop: 20 ,
         borderColor: 'black'
