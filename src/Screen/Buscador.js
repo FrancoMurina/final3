@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
         marginvertical: 10,
         fontSize: 15,
         marginTop: 50,
+        marginBottom: 50, 
         fontFamily: "futura",
     },
     button:{
