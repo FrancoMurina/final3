@@ -14,7 +14,7 @@ onSearch(text){
     db.collection('posts')
     .where("email", '==', text)
     .orderBy("createdAt", "desc")
-    .get().then(
+    .onSnapshot(
         docs => {
             let postsAux = [] //Variable auxiliar
             docs.forEach( doc => {
