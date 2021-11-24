@@ -82,24 +82,19 @@ onComment(){
 });}
 }
 
-//Va a mostrar el modal
 showModal(){
-    //console.log('Mostrando modal')
     this.setState({
         showModal: true,
     })
 }
 
-//Va a crear el modal
+
 closeModal(){
-    //console.log('Cerrando modal')
     this.setState({
         showModal: false,
     })
 }
 render(){
-    // console.log(this.props.dataItem.data.comments);
-
 
     return(
         <View stlye={styles.container}>
@@ -126,11 +121,7 @@ render(){
                     </Text>
                 </TouchableOpacity>
             }
-            {/* <TouchableOpacity onPress={()=>{this.showModal()}}>
-                <Text>
-                    Ver comentarios
-                </Text>
-            </TouchableOpacity> */}
+
             {
             this.state.showModal == false ?
             <TouchableOpacity onPress={()=>{this.showModal()}}>
@@ -149,10 +140,8 @@ render(){
                     <TouchableOpacity style ={styles.closeModal} onPress= {()=>{this.closeModal()}}>
                         <Text style ={styles.modalText} style={styles.comentarios}>Cerrar comentarios</Text>
                     </TouchableOpacity>
-                    {/* <Text>
-                        Aca hay comentarios!!!!
-                    </Text> */}
-            <FlatList
+                    
+                <FlatList
                     data = {this.props.dataItem.data.comments}
                     keyExtractor = {item => item.userDisplayName.toString()}
                     renderItem = { ({item}) => 
@@ -247,4 +236,7 @@ const styles = StyleSheet.create({
         cardTitle: {
           color:'black',
         },   
+    modal: {
+        marginLeft: 15,
+    }
 })

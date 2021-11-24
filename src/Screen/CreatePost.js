@@ -24,16 +24,13 @@ handlePost(){
         photo: this.state.photo,
     })
     .then(response => {
-        //console.log(response);
         alert("Posteo realizado correctamente!");
         this.setState({
             comment: ""
         })
-        //console.log(this.props);
         this.props.navigation.navigate('Home');
     })
     .catch(error => {
-        //console.log(error);
         alert("Hay un error con su posteo");
     })
 }
@@ -98,7 +95,6 @@ const styles = StyleSheet.create({
         color: 'black'
     },
     field:{
-        // textAlign: 'center',
         fontFamily: "futura",
         flexDirection: 'row',
         alignItems: 'center',

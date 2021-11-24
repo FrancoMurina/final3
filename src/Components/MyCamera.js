@@ -1,6 +1,6 @@
 import {Camera} from 'expo-camera';
 import React from 'react';
-import { Text, TextInput, TouchableOpacity, View, StyleSheet, Image} from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Image} from 'react-native';
 import { storage } from '../firebase/config';
 
 
@@ -27,7 +27,6 @@ export default class MyCamera extends React.Component{
         if(!this.camera) return;
         this.camera.takePictureAsync()
         .then(photo => {
-            // console.log(photo)
             this.setState({
                 photo: photo.uri
             })
@@ -40,7 +39,6 @@ export default class MyCamera extends React.Component{
             return res.blob();
         })
         .then(image => {
-            //console.log(image);
             const ref = storage.ref(`camera/${Date.now()}.jpg`)
             ref.put(image)
             .then(()=>{

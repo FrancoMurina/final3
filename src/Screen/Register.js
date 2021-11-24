@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         backgrpungcolor:'#0F00FF',
         color:"#FFA400",
         alignItems: 'center',
-        marginLeft: 150,
+        marginLeft: 120,
         borderColor: 'purple',
         borderWidth: 3,
         borderRadius: 12
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     text:{
         textAlign: 'center',
         fontWeight: 50,
-        fontSize: 20,
+        fontSize: 15,
         paddingTop: 10,
         paddingBottom: 10
     },
