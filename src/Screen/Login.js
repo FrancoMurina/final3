@@ -12,26 +12,25 @@ constructor(props){
 }
 
     render(){
-        //console.log(this.state.loggedIn);
     return(
         <View style={styles.container}>
-            <Text style = {styles.text}> Posts app</Text>
+            <Text style = {styles.title}> Posts app</Text>
                 <TextInput
-                    style={styles.field}
+                    style={styles.fieldOne}
                     keyboardType = "email-address"
                     placeholder = "email"
                     onChangeText = {text => this.setState({email:text})}
                 />
                 <TextInput
-                    style={styles.field}
+                    style={styles.fieldTwo}
                     keyboardType = "number-pad"
                     placeholder = "password"
                     secureTextEntry= {true}
                     onChangeText = {text => this.setState({password:text})}
                 />
 
-            <TouchableOpacity style={styles.button} onPress={()=> this.props.handleLogin(this.state.email, this.state.password)}>
-                <Text style = {styles.textBoton}>Login</Text>
+            <TouchableOpacity style={styles.buttonLogin} onPress={()=> this.props.handleLogin(this.state.email, this.state.password)}>
+                <Text style = {styles.text}>Login</Text>
             </TouchableOpacity>
         </View>
        
@@ -44,7 +43,20 @@ const styles = StyleSheet.create({
         alignitems: "center",
         backgroundColor: '#f3e0ef'
     },
-    field:{
+    fieldOne:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        width:'80%',
+        backgroundColor:'purple',
+        color:"#FFA400",
+        padding: 10,
+        marginLeft: 40,
+        marginvertical: 10,
+        fontSize: 15, 
+        marginTop: 50
+
+    },
+    fieldTwo:{
         // textAlign: 'center',
         flexDirection: 'row',
         alignItems: 'center',
@@ -54,25 +66,31 @@ const styles = StyleSheet.create({
         padding: 10,
         marginLeft: 40,
         marginvertical: 10,
-        fontSize: 15
+        fontSize: 15, 
+        marginBottom: 50
     },
-    button:{
-        flexDirection: 'row',
-        alignItems: 'center',
+    buttonLogin:{
         width:'30%',
         backgrpungcolor:'#0F00FF',
         color:"#FFA400",
-        textAlign: 'center',
-        marginLeft: 180,
-        // backgroundColor: 'purple',
-        paddingTop: 30,
+        alignItems: 'center',
+        marginLeft: 150,
+        borderColor: 'purple',
+        borderWidth: 3,
+        borderRadius: 12
     },
     text:{
         textAlign: 'center',
         fontWeight: 50,
         fontSize: 20,
-        paddingTop: 20,
-        paddingBottom: 30
+        paddingTop: 10,
+        paddingBottom: 10
+    },
+    title:{
+        textAlign: 'center',
+        fontWeight: 50,
+        fontSize: 25,
+        paddingTop: 30,
     },
     textBoton:{
         // marginLeft: 100,
