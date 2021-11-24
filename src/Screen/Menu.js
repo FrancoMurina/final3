@@ -1,7 +1,7 @@
 import React, { Component }  from "react";
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, component} from 'react-native';
 import { auth } from "../firebase/config";
 import Register from './Register';
 import Login from './Login';
@@ -96,7 +96,7 @@ render(){
             {this.state.loggedIn === true? 
                 <React.Fragment>
                     <Drawer.Screen name="Home" >
-                        {props =><Home {...props} logout={()=>this.logout()}/>}
+                        {props =><Home {...props} logout={()=>this.logout()}/>}                        
                     </Drawer.Screen>
                     <Drawer.Screen name="Profile" >
                         {props =><Profile {...props} logout={()=>this.logout()}/>}    

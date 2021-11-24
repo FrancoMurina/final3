@@ -1,7 +1,6 @@
 import React, { Component }  from "react";
-import { Text, View, StyleSheet, TouchableOpacity, FlatList} from "react-native";
+import {StyleSheet, FlatList} from "react-native";
 import Post from '../components/Post';
-import Profile from './Profile';
 import { db } from '../firebase/config';
 
 export default class Home extends Component{
@@ -44,13 +43,10 @@ render(){
             <>
                 <Post dataItem = {item}></Post>                      
             </>
-            }
-                
+            }    
             />
         </React.Fragment>
-        
-    )
-    
+    )    
 }
     
 }

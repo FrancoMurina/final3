@@ -1,7 +1,7 @@
 import React, { Component }  from "react";
-import { Text, View, StyleSheet, TouchableOpacity, FlatList, TextInput} from "react-native";
+import {StyleSheet, FlatList, TextInput} from "react-native";
 import Post from '../components/Post';
-import { auth, db } from '../firebase/config';
+import { db } from '../firebase/config';
 
 export default class Buscador extends Component{
     constructor (props){
@@ -32,24 +32,23 @@ onSearch(text){
 }
 render(){
     return(
-        <View>
-        <Text>Buscador</Text>
-        <TextInput style={styles.container}
-                style={styles.field}
-                keyboardType = "default"
-                placeholder = "Busqueda"
-                onChangeText = {text => this.onSearch(text)}
-        />
-        <FlatList
-            data = {this.state.posts}
-            keyExtractor = {post => post.id.toString()}
-            renderItem = { ({item}) => 
-            <>
-                <Post dataItem = {item}></Post>         
-            </>
-            }
-        />
-        </View>
+        <React.Fragment>
+            <TextInput style={styles.container}
+                    style={styles.field}
+                    keyboardType = "default"
+                    placeholder = "Busqueda"
+                    onChangeText = {text => this.onSearch(text)}
+            />
+            <FlatList
+                data = {this.state.posts}
+                keyExtractor = {post => post.id.toString()}
+                renderItem = { ({item}) => 
+                <>
+                    <Post dataItem = {item}></Post>         
+                </>
+                }
+            />
+        </React.Fragment>
     )
 }}
 const styles = StyleSheet.create({

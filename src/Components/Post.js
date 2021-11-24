@@ -106,7 +106,11 @@ render(){
             <Image source={{uri: this.props.dataItem.data.photo}} style={styles.cardImage}></Image>
             <Text style={styles.letras}>Publicado por: {this.props.dataItem.data.owner}</Text>
             <Text style={styles.letras}>Descripción: {this.props.dataItem.data.description}</Text>
-            <Text style={styles.letras}>Publicado hace: {Math.ceil((Date.now()- this.props.dataItem.data.createdAt)/1000/3600)} horas</Text>
+            { Math.ceil((Date.now()- this.props.dataItem.data.createdAt)/1000/3600) != 1?
+                <Text style={styles.letras}>Publicado hace: {Math.ceil((Date.now()- this.props.dataItem.data.createdAt)/1000/3600)} horas</Text>
+                :
+                <Text style={styles.letras}>Publicado hace: {Math.ceil((Date.now()- this.props.dataItem.data.createdAt)/1000/3600)} hora</Text>
+            }
             <Text style={styles.letras}>Likes: {this.state.likes}</Text>
             {
                 !this.state.liked ?
