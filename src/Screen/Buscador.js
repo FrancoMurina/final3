@@ -33,8 +33,7 @@ onSearch(text){
 render(){
     return(
         <React.Fragment>
-            <TextInput style={styles.container}
-                    style={styles.field}
+            <TextInput style={styles.container} style={styles.field}
                     keyboardType = "default"
                     placeholder = "Busqueda"
                     onChangeText = {text => this.onSearch(text)}
@@ -55,13 +54,19 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         alignitems: "center",
+        backgroundColor: '#f3e0ef',
     },
     field:{
+        // textAlign: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
         width:'80%',
-        backgroundColor:'#09009B',
+        backgroundColor:'purple',
         color:"#FFA400",
         padding: 10,
+        marginLeft: 40,
         marginvertical: 10,
+        fontSize: 15,
     },
     button:{
         width:'30%',

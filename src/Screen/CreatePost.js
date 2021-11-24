@@ -64,7 +64,7 @@ render(){
                 value = {this.state.comment}
             />
             <TouchableOpacity style = {styles.button} onPress={() => this.handlePost()}>
-                <Text style = {styles.text}> Post </Text>
+                <Text style = {styles.text}>      Post </Text>
             </TouchableOpacity>
         </View>
         </React.Fragment>
@@ -79,19 +79,25 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center'
     },
-    field: {
-        width: '80%',
-        backgroundColor: "#09009B",
-        color: '#FFA400',
-        padding: 10,
-        marginVertical: 10
-    },
+
     button: {
         width: '30%',
-        backgroundColor: "#0F00FF",
+        backgroundColor: "purple",
     },
     text: {
-        color: '#FFA400',
-        fontSize: 20
-    }
+        color: 'white',
+        fontSize: 20,
+    },
+    field:{
+        // textAlign: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
+        width:'80%',
+         backgroundColor: '#f3e0ef',
+        color:"#FFA400",
+        padding: 10,
+        marginLeft: 10,
+        marginvertical: 10,
+        fontSize: 15,
+    },
 })

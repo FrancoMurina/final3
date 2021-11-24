@@ -38,15 +38,15 @@ delete(id){
 render(){
     return(
         <React.Fragment>
-            <Text>Perfil de: {auth.currentUser.displayName} </Text>
-            <Text>Fecha de ultimo acceso: {auth.currentUser.metadata.lastSignInTime} </Text>
+            <Text style={styles.letras}>Perfil de: {auth.currentUser.displayName} </Text>
+            <Text style={styles.letras}>Fecha de ultimo acceso: {auth.currentUser.metadata.lastSignInTime} </Text>
             {this.state.posts.length != 1?
-                <Text>Usted tiene: {this.state.posts.length} publicaciones.</Text>
+                <Text style={styles.letras}>Usted tiene: {this.state.posts.length} publicaciones.</Text>
                 :
-                <Text>Usted tiene: {this.state.posts.length} publicacion.</Text>
+                <Text style={styles.letras}>Usted tiene: {this.state.posts.length} publicacion.</Text>
             }
             <TouchableOpacity style= {styles.button} onPress={()=> this.props.logout()}>
-                <Text style={styles.text}>Logout </Text>
+                <Text style={styles.text} style={styles.exit}>Logout </Text>
             </TouchableOpacity>
             <FlatList
                 data = {this.state.posts}
@@ -56,7 +56,7 @@ render(){
                         <Post dataItem = {item}></Post>   
                     {     
                     <TouchableOpacity onPress = {()=> this.delete(item.id)}>
-                        <Text>Borrar</Text>
+                        <Text style={styles.exit}>Borrar</Text>
                     </TouchableOpacity>
                     }        
                     </>
@@ -73,5 +73,17 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: '#09009B'
-    }
+    },
+    letras: {
+        fontFamily: "futura",
+        fontSize: 13,
+        color: 'black',
+        marginLeft: 15, 
+    },
+    exit: {
+        fontFamily: "futura",
+        fontSize: 13,
+        color: 'red',
+        marginLeft: 15, 
+    },
 })
