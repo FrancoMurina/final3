@@ -12,7 +12,9 @@ export default class Home extends Component{
     }
 
 componentDidMount(){
-    db.collection('posts').orderBy("createdAt", "desc").onSnapshot(
+    db.collection('posts')
+    .orderBy("createdAt", "desc")
+    .onSnapshot(
         docs => {
             let postsAux = [] //Variable auxiliar
             docs.forEach( doc => {
@@ -26,11 +28,6 @@ componentDidMount(){
             })
         }
     )
-}
-
-delete(id){
-    const posteoActualizar = db.collection('posts').doc(id)
-    posteoActualizar.delete()
 }
 
 render(){
